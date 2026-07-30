@@ -711,16 +711,52 @@
             </div>
         </div>
     </main>
-<!-- TAB 4: LISTS (清單) -->
+   <!-- TAB 4: LISTS (清單) -->
     <main id="tab-lists" class="tab-content p-4">
-        <h2 class="font-cute text-2xl font-bold mb-4 text-center">準備與筆記</h2>
+        <h2 class="font-cute text-2xl font-bold mb-4 text-center">準備與參考清單</h2>
+        
+        <!-- 動態 CheckList -->
         <div class="glass-card p-5 mb-6">
-            <h3 class="font-bold text-lg mb-3 border-b-2 border-wine/20 pb-2"><i class="fa-solid fa-clipboard-check mr-2"></i>行前 CheckList</h3>
-            <div id="checklist-container" class="space-y-2"></div>
+            <h3 class="font-bold text-lg mb-3 border-b-2 border-wine/20 pb-2"><i class="fa-solid fa-clipboard-check mr-2"></i>行前 / 購物 CheckList</h3>
+            <div class="flex gap-2 mb-3">
+                <input type="text" id="new-check-item" placeholder="新增要帶的東西或必買物..." class="w-full p-2 border-2 border-peach rounded-xl bg-transparent focus:outline-none text-sm font-medium">
+                <button onclick="addChecklistItem()" class="bg-wine text-peach px-4 rounded-xl font-bold active:scale-95 whitespace-nowrap shadow">新增</button>
+            </div>
+            <div id="checklist-container" class="space-y-2 mt-4">
+                <!-- JS 渲染 -->
+            </div>
         </div>
+
+        <!-- 購物願望圖庫 -->
+        <div class="glass-card p-5 mb-6">
+            <h3 class="font-bold text-lg mb-2 border-b-2 border-wine/20 pb-2"><i class="fa-solid fa-images mr-2"></i>購物願望與參考圖庫</h3>
+            <p class="text-[10px] opacity-80 mb-3 font-bold">上傳網路上看到的必買伴手禮或景點照，方便比對！</p>
+            
+            <input type="text" id="ref-photo-title" placeholder="圖片說明 (例：A-FACTORY 蘋果派)" class="w-full p-2 mb-3 border-2 border-peach rounded-xl bg-transparent focus:outline-none text-sm font-medium">
+            
+            <div class="flex items-center justify-between mb-3">
+                <label for="ref-photo-upload" class="flex-1 text-center border-2 border-dashed border-wine rounded-xl p-2 cursor-pointer hover:bg-wine hover:text-peach transition-colors">
+                    <i class="fa-solid fa-image mb-1 block text-xl"></i>
+                    <span class="text-xs font-bold" id="ref-photo-label">上傳參考圖 (自動壓縮)</span>
+                    <input type="file" id="ref-photo-upload" accept="image/*" class="hidden" onchange="handleRefPhotoSelect(event)">
+                </label>
+                <canvas id="ref-photo-canvas" class="hidden w-16 h-16 ml-3 rounded-xl border-2 border-wine object-cover"></canvas>
+            </div>
+            
+            <button onclick="addRefPhoto()" class="w-full bg-peach text-wine border border-wine font-bold py-2 rounded-xl active:scale-95 mb-4 shadow">
+                儲存參考圖
+            </button>
+
+            <!-- 參考圖展示區 -->
+            <div id="ref-photo-list" class="grid grid-cols-2 gap-3 border-t border-dashed border-peach pt-4">
+                <!-- JS Render -->
+            </div>
+        </div>
+
+        <!-- Memo -->
         <div class="glass-card p-5 mb-6">
             <h3 class="font-bold text-lg mb-3 border-b-2 border-wine/20 pb-2"><i class="fa-solid fa-note-sticky mr-2"></i>個人備忘錄</h3>
-            <textarea id="memo-input" rows="5" class="w-full p-3 border-2 border-peach rounded-xl bg-transparent text-sm mb-3" placeholder="貼上筆記..."></textarea>
+            <textarea id="memo-input" rows="5" class="w-full p-3 border-2 border-peach rounded-xl bg-transparent focus:outline-none text-sm mb-3" placeholder="貼上筆記..."></textarea>
             <div class="bg-peach/30 p-3 rounded-xl border border-wine/20">
                 <div id="memo-display" class="text-sm whitespace-pre-wrap word-break"></div>
             </div>
@@ -1201,24 +1237,30 @@
     }
     // --- Lists: Checklist & Memo ---
     const defaultChecklist = [
-        { id: 1, text: "護照正本", checked: false },
-        { id: 2, text: "日幣現金/信用卡", checked: false },
-        { id: 3, text: "網卡/eSIM", checked: false },
+        { id: 1, text: "護照正本 (效期6個月以上)", checked: false },
+        { id: 2, text: "日幣現金 / 信用卡", checked: false },
+        { id: 3, text: "網卡 / eSIM", checked: false },
         { id: 4, text: "薄外套與輕便鞋", checked: false },
-        { id: 5, text: "隨身藥品/休足時間", checked: false },
-        { id: 6, text: "下載離線地圖", checked: false }
+        { id: 5, text: "隨身藥品 / 休足時間", checked: false },
+        { id: 6, text: "下載 Google 離線地圖", checked: false }
     ];
-    let checklistData = JSON.parse(localStorage.getItem('aomori_checklist')) || defaultChecklist;
+    let checklistData = JSON.parse(localStorage.getItem('aomori_checklist'));
+    if(!checklistData || checklistData.length === 0) { checklistData = defaultChecklist; }
 
     function renderChecklist() {
         const container = document.getElementById('checklist-container');
         container.innerHTML = '';
         checklistData.forEach(item => {
             const html = `
-                <label class="flex items-center p-3 glass-card cursor-pointer ${item.checked ? 'opacity-60' : ''}">
-                    <input type="checkbox" class="w-5 h-5 rounded border-wine text-wine focus:ring-wine mr-3" ${item.checked ? 'checked' : ''} onchange="toggleChecklist(${item.id})">
-                    <span class="text-sm font-bold ${item.checked ? 'line-through' : ''}">${item.text}</span>
-                </label>
+                <div class="flex items-center justify-between p-3 glass-card mb-2 ${item.checked ? 'opacity-60' : ''}">
+                    <label class="flex items-center flex-1 cursor-pointer min-w-0">
+                        <input type="checkbox" class="w-5 h-5 rounded border-wine text-wine focus:ring-wine mr-3 flex-shrink-0" ${item.checked ? 'checked' : ''} onchange="toggleChecklist(${item.id})">
+                        <span class="text-sm font-bold truncate ${item.checked ? 'line-through' : ''}">${item.text}</span>
+                    </label>
+                    <button onclick="deleteChecklistItem(${item.id})" class="ml-2 text-wine opacity-50 hover:opacity-100 p-1 flex-shrink-0">
+                        <i class="fa-solid fa-trash-can"></i>
+                    </button>
+                </div>
             `;
             container.insertAdjacentHTML('beforeend', html);
         });
@@ -1229,13 +1271,110 @@
         if (item) { item.checked = !item.checked; localStorage.setItem('aomori_checklist', JSON.stringify(checklistData)); renderChecklist(); }
     }
 
+    function addChecklistItem() {
+        const input = document.getElementById('new-check-item');
+        const text = input.value.trim();
+        if(!text) return;
+        checklistData.push({ id: Date.now(), text: text, checked: false });
+        localStorage.setItem('aomori_checklist', JSON.stringify(checklistData));
+        input.value = '';
+        renderChecklist();
+    }
+
+    function deleteChecklistItem(id) {
+        checklistData = checklistData.filter(i => i.id !== id);
+        localStorage.setItem('aomori_checklist', JSON.stringify(checklistData));
+        renderChecklist();
+    }
+
+    // --- Lists: Reference Photos (願望清單) ---
+    let refPhotos = JSON.parse(localStorage.getItem('aomori_ref_photos')) || [];
+    let tempRefBase64 = null;
+
+    function handleRefPhotoSelect(event) {
+        const file = event.target.files[0];
+        if (!file) return;
+        document.getElementById('ref-photo-label').innerText = "處理中...";
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            const img = new Image();
+            img.onload = function() {
+                const canvas = document.getElementById('ref-photo-canvas');
+                const ctx = canvas.getContext('2d');
+                // 參考圖稍微大一點以利辨識，但仍需壓縮
+                const MAX_WIDTH = 300; 
+                let scale = 1;
+                if (img.width > MAX_WIDTH) scale = MAX_WIDTH / img.width;
+                canvas.width = img.width * scale;
+                canvas.height = img.height * scale;
+                ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+                tempRefBase64 = canvas.toDataURL('image/jpeg', 0.4); 
+                canvas.classList.remove('hidden');
+                document.getElementById('ref-photo-label').innerText = "預覽已生成";
+            }
+            img.src = e.target.result;
+        }
+        reader.readAsDataURL(file);
+    }
+
+    function addRefPhoto() {
+        const title = document.getElementById('ref-photo-title').value.trim();
+        if(!tempRefBase64) { alert("請先上傳圖片！"); return; }
+        if(!title) { alert("請輸入圖片說明！"); return; }
+        
+        const newRef = { id: Date.now(), title: title, photo: tempRefBase64 };
+        try {
+            refPhotos.unshift(newRef);
+            localStorage.setItem('aomori_ref_photos', JSON.stringify(refPhotos));
+        } catch(e) {
+            alert("手機儲存空間不足，請刪除一些舊圖片！");
+            refPhotos.shift();
+            return;
+        }
+
+        document.getElementById('ref-photo-title').value = '';
+        document.getElementById('ref-photo-canvas').classList.add('hidden');
+        document.getElementById('ref-photo-label').innerText = "上傳參考圖 (自動壓縮)";
+        document.getElementById('ref-photo-upload').value = '';
+        tempRefBase64 = null;
+        renderRefPhotos();
+    }
+
+    function deleteRefPhoto(id) {
+        if(confirm("確定要刪除這張參考圖嗎？")) {
+            refPhotos = refPhotos.filter(p => p.id !== id);
+            localStorage.setItem('aomori_ref_photos', JSON.stringify(refPhotos));
+            renderRefPhotos();
+        }
+    }
+
+    function renderRefPhotos() {
+        const container = document.getElementById('ref-photo-list');
+        container.innerHTML = '';
+        refPhotos.forEach(p => {
+            const html = `
+                <div class="relative bg-cream rounded-xl border border-wine/20 overflow-hidden shadow flex flex-col">
+                    <button onclick="deleteRefPhoto(${p.id})" class="absolute top-1 right-1 w-6 h-6 bg-red-600 text-white rounded-full flex justify-center items-center z-10">
+                        <i class="fa-solid fa-xmark text-xs"></i>
+                    </button>
+                    <img src="${p.photo}" class="w-full h-24 object-cover cursor-pointer" onclick="window.open('${p.photo}', '_blank')">
+                    <div class="p-2 text-center text-xs font-bold text-wine truncate bg-peach/20 border-t border-peach/50">
+                        ${p.title}
+                    </div>
+                </div>
+            `;
+            container.insertAdjacentHTML('beforeend', html);
+        });
+    }
+
+    // --- Memo ---
     const memoInput = document.getElementById('memo-input');
     const memoDisplay = document.getElementById('memo-display');
 
     function linkify(text) {
         const urlRegex = /(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/ig;
         return text.replace(urlRegex, function(url) {
-            return `<a href="${url}" target="_blank" class="text-blue-700 underline">連結</a>`;
+            return `<a href="${url}" target="_blank" class="text-blue-700 underline font-bold">開啟連結</a>`;
         });
     }
 
@@ -1251,6 +1390,7 @@
     window.onload = function() {
         renderExpenses();
         renderChecklist();
+        renderRefPhotos(); // 初始化願望清單
         const savedMemo = localStorage.getItem('aomori_memo') || '';
         memoInput.value = savedMemo;
         updateMemo();
