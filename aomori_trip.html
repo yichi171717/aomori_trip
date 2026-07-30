@@ -1,0 +1,1261 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>青森AOMORI 2026SUMMER TRIP</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Kiwi+Maru:wght@400;500;700&family=Noto+Sans+TC:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        peach: '#efaa9c',
+                        wine: '#992d2d',
+                        cream: '#fff9f6',
+                    },
+                    fontFamily: {
+                        sans: ['"Noto Sans TC"', 'sans-serif'],
+                        cute: ['"Kiwi Maru"', 'serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-color: #efaa9c;
+            color: #992d2d;
+            -webkit-tap-highlight-color: transparent;
+        }
+        /* Custom Scrollbar for smooth mobile feel */
+        ::-webkit-scrollbar { width: 4px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: #992d2d; border-radius: 10px; opacity: 0.5; }
+        
+        /* App Layout */
+        .app-container {
+            max-width: 480px;
+            margin: 0 auto;
+            background-color: #efaa9c;
+            min-height: 100vh;
+            position: relative;
+            box-shadow: 0 0 20px rgba(153, 45, 45, 0.2);
+        }
+        .tab-content { display: none; padding-bottom: 90px; }
+        .tab-content.active { display: block; animation: fadeIn 0.3s ease; }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(5px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Timeline Styles */
+        .timeline-container { border-left: 3px dashed #992d2d; margin-left: 20px; padding-left: 24px; }
+        .timeline-item { position: relative; margin-bottom: 1.5rem; }
+        .timeline-dot {
+            position: absolute;
+            left: -37.5px;
+            top: 12px;
+            width: 24px;
+            height: 24px;
+            background-color: #efaa9c;
+            border: 4px solid #992d2d;
+            border-radius: 50%;
+            z-index: 10;
+        }
+        
+        /* Utility */
+        .glass-card {
+            background: rgba(255, 249, 246, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            box-shadow: 0 8px 16px rgba(153, 45, 45, 0.1);
+            border: 2px solid rgba(153, 45, 45, 0.15);
+        }
+        
+        .cute-img {
+            width: 60px; height: 60px;
+            border-radius: 50%;
+            border: 3px solid #992d2d;
+            object-fit: cover;
+        }
+        
+        .nav-btn.active {
+            color: #efaa9c;
+            background: #992d2d;
+            border-radius: 16px;
+            padding: 8px 16px;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(153,45,45,0.3);
+        }
+    </style>
+</head>
+<body class="font-sans antialiased">
+
+<div class="app-container">
+    <!-- Header -->
+    <header class="sticky top-0 z-50 bg-peach/95 backdrop-blur-md border-b-2 border-wine/20 p-4 text-center">
+        <h1 class="font-cute text-2xl font-bold tracking-wider">🍎 青森AOMORI🍎</h1>
+        <p class="text-xs font-bold opacity-80 mt-1">2026.08.07 - 08.16</p>
+    </header>
+
+    <!-- TAB 1: PLAN (行程表) -->
+    <main id="tab-plan" class="tab-content active p-4">
+        <!-- 航班與住宿摘要 -->
+        <div class="glass-card p-4 mb-6">
+            <h2 class="font-cute text-lg font-bold mb-3 border-b-2 border-wine/20 pb-2"><i class="fa-solid fa-plane-departure mr-2"></i>行前資訊</h2>
+            <div class="space-y-2 text-sm font-medium">
+                <p class="flex items-start"><i class="fa-solid fa-plane text-wine opacity-70 mt-1 mr-2 w-4"></i>去程：8/7 BR122 (09:55 ➔ 14:20)</p>
+                <p class="flex items-start"><i class="fa-solid fa-plane-arrival text-wine opacity-70 mt-1 mr-2 w-4"></i>回程：8/12＆/8/16 BR121 (15:30 ➔ 18:30)</p>
+                <div class="border-t border-dashed border-peach my-2 pt-2">
+                    <p class="text-xs text-wine font-bold mb-1 opacity-80">住宿清單：</p>
+                    <p class="flex items-start"><i class="fa-solid fa-hotel text-wine opacity-70 mt-1 mr-2 w-4"></i>8/7-8 Alpha Hotel Aomori<br><span class="text-[10px] opacity-70">青森市橋本1丁目1-7</span></p>
+                    <p class="flex items-start"><i class="fa-solid fa-hotel text-wine opacity-70 mt-1 mr-2 w-4"></i>8/8-9 Dormy Inn Hirosaki<br><span class="text-[10px] opacity-70"> 弘前市大字本町71-1</span></p>
+                    <p class="flex items-start"><i class="fa-solid fa-house text-wine opacity-70 mt-1 mr-2 w-4"></i>8/9-12 古川 Airbnb<<br><span class="text-[10px] opacity-70">青森市古川3丁目21-1</span></p>
+                    <p class="flex items-start"><i class="fa-solid fa-hotel text-wine opacity-70 mt-1 mr-2 w-4"></i>8/12-16 Route Inn 青森站前<br><span class="text-[10px] opacity-70">青森市新町1丁目1-24</span></p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 家庭旅遊段落 -->
+        <div class="text-center mb-6 border-b-2 border-wine/30 pb-2">
+            <span class="bg-wine text-peach px-4 py-1 rounded-full font-bold text-sm">👨‍👩‍👧‍👦 第一階段：家族溫馨旅行</span>
+        </div>
+
+        <!-- 行程時間軸 -->
+        <div class="timeline-container relative">
+            <!-- Day 1 -->
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <h2 class="font-cute text-xl font-bold mb-3 bg-wine text-cream inline-block px-4 py-1 rounded-full">Day 1 (8/7 五)</h2>
+                
+                <div class="glass-card p-4 mb-3 border-l-4 border-l-peach">
+                    <span class="meal-marker"><i class="fa-solid fa-utensils mr-1"></i>早餐</span>
+                    <h3 class="font-bold text-lg">機場美食街</h3>
+                    <p class="text-xs opacity-80 mt-1">搭機前於機場享用早餐</p>
+                </div>
+
+                <div class="glass-card p-4 mb-3">
+                    <div class="flex justify-between items-start">
+                        <div>
+                            <h3 class="font-bold text-lg">抵達青森市區</h3>
+                            <p class="text-sm opacity-80 mt-1">14:20 抵達青森機場</p>
+                            <p class="text-sm opacity-80">15:10 機場巴士前往市區</p>
+                            <p class="text-sm opacity-80">16:00 Alpha Hotel Aomori checkin</p>
+                        </div>
+                        <i class="fa-solid fa-suitcase-rolling text-2xl opacity-30"></i>
+                    </div>
+                </div>
+
+                <div class="glass-card p-4 mb-3">
+                    <h3 class="font-bold text-lg">市區神社巡禮</h3>
+                    <p class="text-sm mt-1">步行參拜</p>
+                    <ul class="text-xs mt-2 space-y-1">
+                        <li><b>善知鳥/金生稻荷神社：</b>歷史最悠久，祈財與平安</li>
+                        <li><b>廣田神社：</b>🍎 蘋果手水舍/金狐狸/蘋果御守</li>
+                    </ul>
+                </div>
+
+                <div class="glass-card p-4 mb-3 border-l-4 border-l-peach">
+                    <span class="meal-marker"><i class="fa-solid fa-utensils mr-1"></i>晚餐</span>
+                    <h3 class="font-bold text-lg">味の札幌 大西</h3>
+                    <p class="text-sm mt-1 font-bold">🍜 必吃：味噌咖哩牛奶拉麵</p>
+                    <p class="text-xs mt-1 opacity-80">營業至18:00</p>
+                </div>
+
+                <div class="glass-card p-4 mb-3 bg-wine text-cream border-none relative overflow-hidden">
+                    <i class="fa-solid fa-fire absolute -right-2 -bottom-2 text-6xl opacity-20"></i>
+                    <h3 class="font-bold text-lg">🎇 睡魔祭最終夜@青森港</h3>
+                    <p class="text-sm mt-1">19:15 海上運行與花火大會</p>
+                    <p class="text-xs mt-1 opacity-80">煙火由防波堤發射，與海面巨型燈籠船形成完美構圖！</p>
+                </div>
+            </div>
+
+            <!-- Day 2 -->
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <h2 class="font-cute text-xl font-bold mb-3 bg-wine text-cream inline-block px-4 py-1 rounded-full">Day 2 (8/8 六)</h2>
+                
+                <div class="glass-card p-4 mb-3 border-l-4 border-l-peach">
+                    <span class="meal-marker"><i class="fa-solid fa-utensils mr-1"></i>早餐</span>
+                    <h3 class="font-bold text-lg">飯店自助式早餐</h3>
+                </div>
+
+                <div class="glass-card p-4 mb-3">
+                    <h3 class="font-bold text-lg">移動至弘前</h3>
+                    <p class="text-sm mt-1">搭乘 JR 奧羽本線</p>
+                    <p class="text-xs mt-1 bg-peach/30 inline-block px-2 py-1 rounded">🗺️ 必拿：弘前站觀光案內所「弘前蘋果派地圖」</p>
+                    <p class="text-sm mt-2 opacity-80">搭計程車或公車至 Dormy Inn 寄放行李</p>
+                </div>
+
+                <div class="glass-card p-4 mb-3">
+                    <h3 class="font-bold text-lg">弘前市蘋果公園</h3>
+                    <p class="text-sm mt-1">蘋果小屋預約採果</p>
+                    <p class="text-xs mt-1 opacity-80">戴斗笠採夏蘋果，以岩木山為背景拍照。</p>
+                </div>
+
+                <div class="glass-card p-4 mb-3 border-l-4 border-l-peach">
+                    <span class="meal-marker"><i class="fa-solid fa-utensils mr-1"></i>午餐</span>
+                    <h3 class="font-bold text-lg">園區內餐廳</h3>
+                    <p class="text-sm mt-1">蘋果豬排咖哩 / 蘋果拉麵</p>
+                </div>
+
+                <div class="glass-card p-4 mb-3">
+                    <h3 class="font-bold text-lg">金剛山 最勝院</h3>
+                    <p class="text-sm mt-1">東北第一美塔</p>
+                    <p class="text-xs opacity-80">欣賞 350 年歷史、高 31 公尺五重塔</p>
+                </div>
+
+                <div class="glass-card p-4 mb-3 border-l-4 border-l-peach">
+                    <span class="meal-marker"><i class="fa-solid fa-utensils mr-1"></i>晚餐</span>
+                    <h3 class="font-bold text-lg">菊富士本店</h3>
+                    <p class="text-sm mt-1">19:00 創作郷土料理の店</p>
+                </div>
+            </div>
+
+            <!-- Day 3 -->
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <h2 class="font-cute text-xl font-bold mb-3 bg-wine text-cream inline-block px-4 py-1 rounded-full">Day 3 (8/9 日)</h2>
+                
+                <div class="glass-card p-4 mb-3 border-l-4 border-l-peach">
+                    <span class="meal-marker"><i class="fa-solid fa-utensils mr-1"></i>早餐</span>
+                    <h3 class="font-bold text-lg">飯店自助式早餐</h3>
+                </div>
+
+                <div class="glass-card p-4 mb-3">
+                    <h3 class="font-bold text-lg">弘前城 / 弘前公園</h3>
+                    <p class="text-sm mt-1">漫步日本現存 12 天守之一古城</p>
+                </div>
+                
+                <div class="glass-card p-4 mb-3">
+                    <h3 class="font-bold text-lg">津輕藩睡魔村</h3>
+                    <p class="text-sm mt-1">觀賞扇形燈籠</p>
+                    <p class="text-xs mt-1 font-bold">🎶 必聽：爆發力十足的「津輕三味線」</p>
+                </div>
+
+                <div class="glass-card p-4 mb-3 border-l-4 border-l-peach">
+                    <span class="meal-marker"><i class="fa-solid fa-utensils mr-1"></i>午餐</span>
+                    <h3 class="font-bold text-lg">Katsutei (かつ亭)</h3>
+                    <p class="text-sm mt-1">弘前超人氣炸豬排</p>
+                    <p class="text-xs opacity-80 mt-1">營業至14:30</p>
+                </div>
+
+                <div class="glass-card p-4 mb-3">
+                    <h3 class="font-bold text-lg">採買蘋果派後前進青森市</h3>
+                    <p class="text-sm mt-1">取行李搭 JR 回青森市</p>
+                    <p class="text-xs mt-1 opacity-80">入住「古川 bnb」</p>
+                </div>
+
+                <div class="glass-card p-4 mb-3">
+                    <h3 class="font-bold text-lg">睡魔之家 WA RASSE</h3>
+                    <p class="text-sm mt-1">步行前往，近距離觀賞得獎巨型燈籠</p>
+                </div>
+
+                <div class="glass-card p-4 mb-3">
+                    <h3 class="font-bold text-lg">購物：A-FACTORY</h3>
+                    <p class="text-sm mt-1">營業至19:00</p>
+                    <ul class="text-xs mt-2 space-y-1">
+                        <li>🍦 必吃：義式冰淇淋與現烤蘋果派</li>
+                        <li>🛍️ 必買：貓咪鹽罐、蘋果果醬、蒜頭美乃滋、蒜粉、蘋果果乾</li>
+                    </ul>
+                </div>
+                
+                <div class="glass-card p-4 mb-3 border-l-4 border-l-peach">
+                    <span class="meal-marker"><i class="fa-solid fa-utensils mr-1"></i>晚餐</span>
+                    <h3 class="font-bold text-lg">商店街 / LOVINA 商場</h3>
+                    <p class="text-sm mt-1">採買回民宿享用</p>
+                </div>
+            </div>
+
+            <!-- Day 4 -->
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <h2 class="font-cute text-xl font-bold mb-3 bg-wine text-cream inline-block px-4 py-1 rounded-full">Day 4 (8/10 一)</h2>
+                
+                <div class="glass-card p-4 mb-3 border-l-4 border-l-peach">
+                    <span class="meal-marker"><i class="fa-solid fa-utensils mr-1"></i>早餐</span>
+                    <h3 class="font-bold text-lg">Coffee Marron</h3>
+                    <p class="text-sm mt-1">昭和氛圍老字號 (營業時間07:00-17:00)</p>
+                    <p class="text-xs opacity-80 mt-1">☕ 提醒：店員不諳英文，請手機截圖厚片吐司與咖啡點餐。</p>
+                </div>
+
+                <div class="glass-card p-4 mb-3">
+                    <h3 class="font-bold text-lg">三內丸山遺跡</h3>
+                    <p class="text-sm mt-1">五千年前世界文化遺產</p>
+                </div>
+
+                <div class="glass-card p-4 mb-3 border-l-4 border-l-peach">
+                    <span class="meal-marker"><i class="fa-solid fa-utensils mr-1"></i>午餐</span>
+                    <h3 class="font-bold text-lg">れすとらん 五千年の星</h3>
+                </div>
+
+                <div class="glass-card p-4 mb-3 flex justify-between items-center">
+                    <div>
+                        <h3 class="font-bold text-lg">青森縣立美術館</h3>
+                        <p class="text-sm mt-1">戶外展區大合照</p>
+                        <p class="text-xs mt-1">🐕 必拍：8.5 公尺巨型純白青森犬</p>
+                    </div>
+                    <i class="fa-solid fa-dog text-4xl opacity-40 text-wine mr-2"></i>
+                </div>
+
+                <div class="glass-card p-4 mb-3 border-l-4 border-l-peach">
+                    <h3 class="font-bold text-lg">購物：UNIQLO & 唐吉訶德＆運動用品</h3>
+                    <span class="meal-marker mt-2"><i class="fa-solid fa-utensils mr-1"></i>晚餐</span>
+                    <h3 class="font-bold text-lg">商城用餐或 LOPIA 買回民宿</h3>
+                    <p class="text-xs mt-2 font-bold bg-peach/30 inline-block px-2 py-1 rounded">提醒：購買明天早餐與隨身點心</p>
+                </div>
+            </div>
+
+            <!-- Day 5 -->
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <h2 class="font-cute text-xl font-bold mb-3 bg-wine text-cream inline-block px-4 py-1 rounded-full">Day 5 (8/11 二)</h2>
+                
+                <div class="glass-card p-4 mb-3 bg-[#992d2d] text-[#efaa9c] border-2 border-[#efaa9c]">
+                    <h3 class="font-bold text-lg"><i class="fa-solid fa-car-side mr-2"></i>包車絕景一日遊</h3>
+                    <p class="text-xs mt-1 opacity-90">Booking ID: 45187</p>
+                    <p class="text-sm mt-1">09:00 bnb 門口出發 (8小時包車)</p>
+                    <p class="text-[10px] mt-1 opacity-80">超時費 1萬日幣/時，過路費另計現金</p>
+                </div>
+
+                <div class="glass-card p-4 mb-3 relative overflow-hidden">
+                    <div class="absolute -right-4 -bottom-4 opacity-10">
+                        <i class="fa-solid fa-mountain-sun text-8xl"></i>
+                    </div>
+                    <h3 class="font-bold mb-2">五大絕景導覽 (⚠️山區無訊號)</h3>
+                    <ul class="list-disc ml-4 space-y-2 text-sm font-medium">
+                        <li><b>八甲田纜車：</b> 360度俯瞰津輕平原與陸奧灣。</li>
+                        <li><b>城倉大橋：</b> 120公尺高俯瞰溪谷。</li>
+                        <li><b>蔦沼：</b> 水面如鏡的神秘空靈沼澤。</li>
+                        <li><b>奧入瀨溪流：</b> 石之戶➔阿修羅之流 / 雲井瀑布➔銚子大瀑布。</li>
+                        <li><b>十和田湖：</b> 湛藍雙層破火山口湖。</li>
+                    </ul>
+                </div>
+
+                <div class="glass-card p-4 mb-3 border-l-4 border-l-peach">
+                    <span class="meal-marker"><i class="fa-solid fa-utensils mr-1"></i>晚餐 (三選一)</span>
+                    <ul class="text-xs mt-2 space-y-2">
+                        <li class="border-b border-dashed border-peach pb-1">1. 津軽じょっぱり漁屋酒場 (營業16:45-00:00)</li>
+                        <li class="border-b border-dashed border-peach pb-1">2. 帆立小屋 (營業11:00-00:00)</li>
+                        <li>3. 海の食堂 大福丸 (營業17:00-21:30)</li>
+                    </ul>
+                    <p class="text-sm mt-2 font-bold">吃飽後商店街逛逛/回民宿整理行李</p>
+                </div>
+            </div>
+
+            <!-- Day 6 (Family Part) -->
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <h2 class="font-cute text-xl font-bold mb-3 bg-wine text-cream inline-block px-4 py-1 rounded-full">Day 6 (8/12 三) 家族賦歸</h2>
+                
+                <div class="glass-card p-4 mb-3 border-l-4 border-l-peach">
+                    <span class="meal-marker"><i class="fa-solid fa-utensils mr-1"></i>早午餐</span>
+                    <h3 class="font-bold text-lg">青森魚菜中心</h3>
+                    <p class="text-sm mt-1">古川市場 Nokkedon</p>
+                    <p class="text-xs mt-1">🐟 必吃：拿白飯穿梭市場，自製海鮮丼！</p>
+                </div>
+
+                <div class="glass-card p-4 mb-3">
+                    <h3 class="font-bold text-lg">最後巡禮與採買</h3>
+                    <p class="text-sm mt-1"> ASPAM / AOMORI 字體拍照 / 睡魔工作坊觀賞巨大燈籠</p>
+                    <p class="text-xs mt-1">至 13 樓展望台俯瞰海灣，1樓與車站周邊最後採買。</p>
+                </div>
+
+                <div class="glass-card p-4 mb-3 flex items-center bg-peach text-wine border-wine">
+                    <i class="fa-solid fa-plane-departure text-3xl mr-4"></i>
+                    <div>
+                        <h3 class="font-bold text-lg">家人乘車往機場</h3>
+                        <p class="text-sm mt-1">12:20 回車站準備</p>
+                        <p class="text-sm">12:40 機場巴士-青森空港 (35分)</p>
+                        <p class="text-xs mt-1 font-bold">家人15:30搭乘飛機BR121返台！</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 獨旅段落 -->
+            <div class="text-center my-8 border-b-2 border-wine/30 pb-2">
+                <span class="bg-peach text-wine px-4 py-1 rounded-full font-bold text-sm border-2 border-wine">🚶 獨旅慢活篇 (Day 6 - Day 10)</span>
+            </div>
+
+            <!-- Day 6 (Solo Part) -->
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <h2 class="font-cute text-xl font-bold mb-3 bg-wine text-cream inline-block px-4 py-1 rounded-full">Day 6 (8/12 三) 下午</h2>
+                
+                <div class="glass-card p-4 mb-3">
+                    <h3 class="font-bold text-lg">溫泉散策</h3>
+                    <p class="text-sm mt-1">Check-in：Route Inn 青森站前</p>
+                    <p class="text-sm mt-1">前往「淺虫溫泉街」散策與海景泡湯 ♨️</p>
+                </div>
+            </div>
+
+            <!-- Day 7 -->
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <h2 class="font-cute text-xl font-bold mb-3 bg-wine text-cream inline-block px-4 py-1 rounded-full">Day 7 (8/13 四)</h2>
+                <div class="glass-card p-4 mb-3">
+                    <h3 class="font-bold text-lg">湛藍秘境</h3>
+                    <p class="text-sm mt-1">白神山地與十二湖 (尋找神祕青池 💧)</p>
+                </div>
+            </div>
+
+            <!-- Day 8 -->
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <h2 class="font-cute text-xl font-bold mb-3 bg-wine text-cream inline-block px-4 py-1 rounded-full">Day 8 (8/14 五)</h2>
+                <div class="glass-card p-4 mb-3">
+                    <h3 class="font-bold text-lg">高原放風</h3>
+                    <p class="text-sm mt-1">Moya Hills 高原，體驗刺激的「夏季滑車」🎢</p>
+                </div>
+            </div>
+
+            <!-- Day 9 -->
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <h2 class="font-cute text-xl font-bold mb-3 bg-wine text-cream inline-block px-4 py-1 rounded-full">Day 9 (8/15 六)</h2>
+                <div class="glass-card p-4 mb-3">
+                    <h3 class="font-bold text-lg">在地採購</h3>
+                    <p class="text-sm mt-1">市區購物 / 朝聖 montbell 戶外裝備 🏕️</p>
+                </div>
+            </div>
+            
+            <!-- Day 10 -->
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <h2 class="font-cute text-xl font-bold mb-3 bg-wine text-cream inline-block px-4 py-1 rounded-full">Day 10 (8/16 日)</h2>
+                <div class="glass-card p-4 mb-3">
+                    <h3 class="font-bold text-lg">港灣歷史與賦歸</h3>
+                    <p class="text-sm mt-1">青函連絡船紀念船 八甲田丸 🚢</p>
+                    <p class="text-xs mt-2 opacity-80">結束青森之旅，準備前往機場。</p>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- TAB 2: GUIDE (深度導覽) -->
+    <main id="tab-guide" class="tab-content p-4">
+        <div class="text-center mb-6">
+            <h2 class="font-cute text-2xl font-bold">大青森尋寶指南</h2>
+            <p class="text-sm opacity-80 mt-2">歷史、文化與絕景的交織</p>
+        </div>
+
+        <!-- 1. 青森概覽 -->
+        <div class="glass-card p-5 mb-6 border-l-4 border-wine">
+            <h3 class="font-cute font-bold text-xl mb-3"><i class="fa-solid fa-map-location-dot mr-2"></i>青森：本州最北的祕境</h3>
+            <!-- 使用更穩定的維基共享資源圖片 (弘前城與岩木山) -->
+            <img src="https://aomori-tourism.com/lsc/upfile/articleDetail/0000/2384/2384_d008_l.jpg">
+            <p class="text-sm leading-relaxed text-justify mb-2">
+                <b>地理與氣候：</b>位於日本本州最北端，三面環海，中央被奧羽山脈一分為二。獨特的地形造就了顯著的氣候差異：冬季日本海側（津輕地區）會降下豪雪；而夏季平均氣溫約 23℃，是非常涼爽的避暑勝地。
+            </p>
+            <p class="text-sm leading-relaxed text-justify">
+                <b>文化特色：</b>受奧羽山脈阻隔，青森縣主要分為西部的「津輕地方」與東部的「南部地方」。津輕地區方言獨特，以剛烈的「津輕三味線」聞名；而我們這次造訪的青森市與弘前市，都屬於充滿濃厚歷史職人氣息的津輕地區。
+            </p>
+        </div>
+
+        <!-- 2. 睡魔祭 -->
+        <div class="glass-card overflow-hidden mb-6">
+            <div class="h-40 bg-wine flex items-center justify-center relative overflow-hidden border-b-4 border-wine">
+                <img src="https://www.specialoffers.jcb/zh-tw/tips/japan/1.jpg">
+                <div class="absolute inset-0 bg-wine/30"></div>
+                <h3 class="font-cute font-bold text-2xl relative z-10 tracking-widest text-cream text-shadow-lg">睡魔祭典</h3>
+            </div>
+            <div class="p-5">
+                <p class="text-sm leading-relaxed text-justify mb-3">
+                    <b>歷史傳統：</b>相傳為了驅趕炎夏妨礙農作的瞌睡蟲（津輕方言的「想睡覺」發音似 Neputa），農民將燈籠流放於河海中，發展成如今名列東北三大祭的睡魔祭。
+                </p>
+                <div class="bg-peach/20 p-3 rounded-lg text-sm leading-relaxed">
+                    <b>🏮 三大區域形式差異：</b>
+                    <ul class="list-disc ml-4 mt-2 space-y-1">
+                        <li><b>青森睡魔 (Nebuta)：</b>立體的巨型武士燈籠，伴隨「Rassera」的熱血吆喝聲。</li>
+                        <li><b>弘前睡魔 (Neputa)：</b>優雅的扇形燈籠，正面畫三國志武士，背面畫幽美女性，伴隨「Ya-ya-do」的呼喊。</li>
+                        <li><b>五所川原 (Tachineputa)：</b>高達 20 多公尺的超高直立式燈籠，極具震撼力。</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- 3. 弘前城 & 5. 最勝院 -->
+        <div class="glass-card p-5 mb-6">
+            <h3 class="font-cute font-bold text-xl mb-3"><i class="fa-brands fa-fort-awesome mr-2"></i>江戶風華：弘前歷史漫步</h3>
+            <div class="mb-4">
+                <b class="text-sm text-wine">🏯 弘前城：</b>
+                <p class="text-sm leading-relaxed text-justify mt-1">
+                    由津輕藩祖津輕為信於江戶時代初期計畫建造。現存的三層天守閣是日本全國現存 12 天守之一，極具歷史價值。
+                </p>
+            </div>
+            <div class="border-t border-dashed border-peach pt-4">
+                <b class="text-sm text-wine">⛩️ 金剛山 最勝院：</b>
+                <p class="text-sm leading-relaxed text-justify mt-1">
+                    建於 1667 年，最著名的「五重塔」高 31 公尺，被譽為<b>東北第一美塔</b>。此塔是為了超渡在津輕統一戰爭中陣亡的敵我雙方將士而建，展現了怨親平等的宏大慈悲。
+                </p>
+            </div>
+        </div>
+
+        <!-- 4. 青森蘋果 -->
+        <div class="glass-card overflow-hidden mb-6">
+            <img src="https://images.unsplash.com/photo-1567306226416-28f0efdc88ce?w=600&h=200&fit=crop" class="w-full h-32 object-cover border-b-4 border-wine" alt="Aomori Apples">
+            <div class="p-5">
+                <h3 class="font-cute font-bold text-xl mb-3">🍎 日本第一的蘋果王國</h3>
+                <p class="text-sm leading-relaxed text-justify mb-2">
+                    青森日夜溫差大、秋季冷涼，是種植蘋果的完美環境，產量佔全日本六成！
+                </p>
+                <ul class="text-sm space-y-2 mt-3 bg-cream p-3 rounded-xl border border-peach">
+                    <li><b>富士 (Fuji)：</b>人氣 NO.1，果汁多、甜度高且清脆。</li>
+                    <li><b>王林 (Orin)：</b>黃綠色外皮，帶有獨特濃郁香氣，甜而不酸。</li>
+                    <li><b>夏綠/津輕：</b>口感清爽多汁，帶點微酸的戀愛滋味，夏日必吃！</li>
+                </ul>
+            </div>
+        </div>
+
+ 
+        <!-- 6. 三內丸山 & 7. 美術館 -->
+        <div class="glass-card overflow-hidden mb-6">
+            <div class="relative h-48 border-b-4 border-wine">
+                <!-- 加上 w-full h-full object-cover 讓圖片完美填滿設定的高度而不會溢出 -->
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTIYqBLdnaKcXrFgC9QJesLBb7NJQNPXBmE_M-XO1ZiCQ&s=10" class="w-full h-full object-cover" alt="青森犬">
+                <div class="absolute bottom-2 right-2 bg-cream/90 px-2 py-1 rounded text-[10px] text-wine font-bold">青森縣立美術館 鎮館之寶</div>
+            </div>
+            <div class="p-5">
+                <h3 class="font-cute font-bold text-xl mb-3"><i class="fa-solid fa-landmark mr-2"></i>穿越時空與藝術對話</h3>
+                <div class="mb-4">
+                    <b class="text-sm text-wine">🛖 三內丸山遺跡 (世界遺產)：</b>
+                    <p class="text-sm leading-relaxed text-justify mt-1">
+                        距今約 5500 至 4000 年前的日本最大繩文聚落遺跡。出土了高達 15 公尺的大型栗木六柱建築。特別的是，這裡沒有發現武器，展現了古人與自然共存、和平繁榮的狩獵採集社會。
+                    </p>
+                </div>
+                <div class="border-t border-dashed border-peach pt-4">
+                    <b class="text-sm text-wine">🎨 青森縣立美術館：</b>
+                    <p class="text-sm leading-relaxed text-justify mt-1">
+                        建築靈感源自遺跡的發掘壕溝，極簡純白。最大亮點是出身弘前市的知名藝術家<b>奈良美智</b>的巨作。館內外藏有百餘件其作品，其中高 8.5 公尺的立體雕塑「青森犬 (Aomori Dog)」帶著一抹淡淡的憂鬱，卻又溫柔地包容著參觀者，是必拍的療癒地標。
+                  
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 8. 自然絕景五選 (特別詳細版) -->
+        <div class="glass-card p-5 mb-6 bg-wine text-cream border-none shadow-[0_8px_30px_rgba(153,45,45,0.4)] relative overflow-hidden">
+            <i class="fa-solid fa-mountain-sun absolute -right-6 -top-6 text-9xl opacity-10"></i>
+            <h3 class="font-cute font-bold text-2xl mb-4 text-peach text-center border-b border-peach/30 pb-3"><i class="fa-solid fa-leaf mr-2"></i>大自然絕景五選</h3>
+            <p class="text-sm text-center mb-5 opacity-90">群山、湖泊與溪流交織的最高傑作，<br>這是一生必訪的自然巡禮。</p>
+            
+            <div class="space-y-6 text-sm">
+                <div class="bg-cream/10 p-4 rounded-xl backdrop-blur-sm border border-peach/20">
+                    <b class="text-peach text-lg block mb-2"><i class="fa-solid fa-cable-car mr-2"></i>① 八甲田纜車 (空中漫步)</b>
+                    <p class="opacity-95 leading-relaxed text-justify">搭乘可容納百人的大型纜車，緩緩爬升至海拔 1,324 公尺的田茂萢岳山頂。隨著高度爬升，腳下的山毛櫸林如同綠色絨毯般展開，登頂後更能 360 度無死角俯瞰廣闊的津輕平原與湛藍的陸奧灣。這裡是眺望大青森全貌的最佳制高點。</p>
+                </div>
+
+                <div class="bg-cream/10 p-4 rounded-xl backdrop-blur-sm border border-peach/20">
+                    <b class="text-peach text-lg block mb-2"><i class="fa-solid fa-bridge mr-2"></i>② 城倉大橋 (谷底震撼)</b>
+                    <p class="opacity-95 leading-relaxed text-justify">全長 360 公尺，是日本最長的上承式拱橋。站在橋中央，向下俯瞰深達 120 公尺的城倉溪谷。夏季時，橋樑被 360 度無死角的濃密新綠包圍。由於橋面平穩寬敞，非常適合在這裡拍下壯麗無比的家族大合照。</p>
+                </div>
+
+                <div class="bg-cream/10 p-4 rounded-xl backdrop-blur-sm border border-peach/20">
+                    <b class="text-peach text-lg block mb-2"><i class="fa-solid fa-water mr-2"></i>③ 蔦沼 (空靈之境)</b>
+                    <p class="opacity-95 leading-relaxed text-justify">隱身於八甲田山麓「蔦之七沼」中最大的沼澤。周圍被保留著原始生態的深邃山毛櫸林環繞。當天氣晴朗且微風輕拂時，水面宛如一面完美的明鏡，將整片翠綠的山林與藍天白雲倒映於湖面，散發著與世隔絕的寧靜氛圍。</p>
+                </div>
+
+                <div class="bg-cream/10 p-4 rounded-xl backdrop-blur-sm border border-peach/20">
+                    <b class="text-peach text-lg block mb-2"><i class="fa-solid fa-person-hiking mr-2"></i>④ 奧入瀨溪流 (綠意仙境)</b>
+                    <p class="opacity-95 leading-relaxed text-justify">綿延 14 公里的國家特別名勝。這裡最大的特色在於「步道與溪流幾乎零距離」。平緩好走的木棧道，非常適合全家人一起漫步。沿途會經過水流充滿張力的「阿修羅之流」，以及氣勢磅礡、水量豐沛的「銚子大瀑布」。在陽光穿透樹冠灑落的斑駁光影中，大口呼吸充滿青苔與蕨類香氣的芬多精。</p>
+                </div>
+
+                <div class="bg-cream/10 p-4 rounded-xl backdrop-blur-sm border border-peach/20">
+                    <b class="text-peach text-lg block mb-2"><i class="fa-solid fa-anchor mr-2"></i>⑤ 十和田湖 (湛藍火山口)</b>
+                    <p class="opacity-95 leading-relaxed text-justify">奧入瀨溪流的源頭，是一座典型的雙層破火山口湖，水深達 327 公尺，位居日本第三深。正因為深不見底，湖水呈現出神祕且深邃的湛藍色。廣闊的湖面與周圍峻峭的破火山口外壁形成強烈對比，是為這趟自然之旅劃下完美句點的壯麗終站。</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 9. 魚菜中心與海鮮 -->
+        <div class="glass-card overflow-hidden mb-6">
+            <img src="https://images.unsplash.com/photo-1579584425555-c3ce17fd4351?w=600&h=200&fit=crop" class="w-full h-32 object-cover border-b-4 border-wine" alt="Sashimi Seafood">
+            <div class="p-5">
+                <h3 class="font-cute font-bold text-xl mb-3"><i class="fa-solid fa-bowl-rice mr-2"></i>古川市場：海鮮控的天堂</h3>
+                <p class="text-sm leading-relaxed text-justify mb-2">
+                    <b>青森魚菜中心 (Nokkedon)：</b> 距離青森車站步行僅 5 分鐘，被稱為「青森市民的廚房」。在這裡可以體驗超好玩的「のっけ丼 (自選海鮮丼)」。
+                </p>
+                <div class="bg-peach/20 p-3 rounded-lg text-sm leading-relaxed">
+                    <b>💡 完美吃法攻略：</b>
+                    <ol class="list-decimal ml-4 mt-1 space-y-1 mb-2">
+                        <li>先在案內所購買「食券」（約 2,200 日圓/12張）。</li>
+                        <li>找亮橘色招牌的攤位換一碗熱騰騰的白飯。</li>
+                        <li>拿著碗穿梭市場，用食券向各攤位兌換喜歡的刺身。</li>
+                    </ol>
+                    <p class="text-wine font-bold">✨ 必吃海味推薦：</p>
+                    <p class="opacity-90">頂級「大間黑鮪魚 (本マグロ)」是絕對重點！另外來自陸奧灣、鮮甜厚實的特大「帆立貝」，以及入口即化的生海膽，都是湊成豪華海鮮丼的靈魂！</p>
+                </div>
+            </div>
+        </div>
+    </main>
+<!-- TAB 3: WALLET (記帳與匯率) -->
+    <main id="tab-wallet" class="tab-content p-4">
+        <h2 class="font-cute text-2xl font-bold mb-4 text-center">計算機 & 記帳本</h2>
+        
+        <!-- 匯率計算機 -->
+        <div class="glass-card p-5 mb-6">
+            <div class="flex items-center justify-between mb-4 pb-2 border-b-2 border-wine/20">
+                <span class="font-bold"><i class="fa-solid fa-calculator mr-2"></i>即時換算</span>
+                <div class="flex items-center text-sm">
+                    <span class="mr-2">匯率:</span>
+                    <input type="number" id="exchange-rate" value="0.22" step="0.001" class="w-16 p-1 text-center border-2 border-peach rounded bg-transparent focus:outline-none" onchange="renderExpenses()">
+                </div>
+            </div>
+            
+            <div class="relative mb-3">
+                <span class="absolute left-3 top-2 font-bold text-lg">¥</span>
+                <input type="text" id="calc-input" placeholder="輸入日幣金額或算式 (如 500+100*2)" class="w-full p-2 pl-8 border-2 border-peach rounded-xl bg-transparent focus:outline-none focus:border-wine text-lg" oninput="calculateConvert()">
+            </div>
+            
+            <div class="bg-wine text-peach text-center p-3 rounded-xl font-bold text-xl">
+                <span id="calc-result">NT$ 0</span>
+            </div>
+        </div>
+
+        <!-- 記帳表單 -->
+        <div class="glass-card p-5 mb-6">
+            <h3 class="font-bold mb-3"><i class="fa-solid fa-pen-to-square mr-2"></i>新增花費</h3>
+            
+            <input type="text" id="expense-name" placeholder="品項名稱 (例：蘋果派)" class="w-full p-2 mb-3 border-2 border-peach rounded-xl bg-transparent focus:outline-none">
+            
+            <!-- 幣別與金額 -->
+            <div class="flex gap-2 mb-3">
+                <select id="expense-currency" class="w-1/3 p-2 border-2 border-peach rounded-xl bg-transparent focus:outline-none text-sm text-wine font-bold">
+                    <option value="JPY">¥ 日幣</option>
+                    <option value="TWD">$ 台幣</option>
+                </select>
+                <input type="number" id="expense-amount" placeholder="金額" class="w-2/3 p-2 border-2 border-peach rounded-xl bg-transparent focus:outline-none">
+            </div>
+            
+            <!-- 消費類別 -->
+            <select id="expense-category" class="w-full p-2 mb-3 border-2 border-peach rounded-xl bg-transparent focus:outline-none text-sm text-wine font-medium">
+                <option value="" disabled selected hidden>選擇消費類別</option>
+                <option value="機票">✈️ 機票</option>
+                <option value="交通">🚃 交通</option>
+                <option value="住宿">🏨 住宿</option>
+                <option value="餐食">🍱 餐食</option>
+                <option value="景點">📸 景點</option>
+                <option value="紀念品">🛍️ 紀念品</option>
+                <option value="其他">📌 其他</option>
+            </select>
+
+            <!-- 誰支出 & 支付方式 -->
+            <div class="flex gap-2 mb-3">
+                <select id="expense-payer" class="w-1/3 p-2 border-2 border-peach rounded-xl bg-transparent focus:outline-none text-sm text-wine font-medium">
+                    <option value="" disabled selected hidden>誰支出？</option>
+                    <option value="爸爸">爸爸</option>
+                    <option value="媽媽">媽媽</option>
+                    <option value="姊姊">姊姊</option>
+                    <option value="妹妹">妹妹</option>
+                </select>
+
+                <select id="expense-method" class="w-2/3 p-2 border-2 border-peach rounded-xl bg-transparent focus:outline-none text-sm text-wine font-medium">
+                    <option value="現金">💵 現金</option>
+                    <option value="台新玫瑰卡">💳 台新玫瑰卡</option>
+                    <option value="中國信託卡">💳 中國信託卡</option>
+                    <option value="國泰cube卡">💳 國泰cube卡</option>
+                    <option value="信用卡(其他)">💳 信用卡(其他)</option>
+                </select>
+            </div>
+
+            <!-- 免稅與護照 -->
+            <div class="mb-3 bg-peach/20 p-3 rounded-xl border border-wine/20">
+                <label class="flex items-center cursor-pointer mb-2">
+                    <input type="checkbox" id="expense-taxfree" class="w-4 h-4 rounded border-wine text-wine focus:ring-wine mr-2" onchange="togglePassport()">
+                    <span class="text-sm font-bold text-wine">🛒 是否有免稅？</span>
+                </label>
+                <!-- 隱藏的護照選單 -->
+                <select id="expense-passport" class="w-full p-2 border-2 border-peach rounded-xl bg-cream focus:outline-none text-sm text-wine font-medium hidden">
+                    <option value="" disabled selected hidden>請選擇免稅使用的護照</option>
+                    <option value="爸爸">爸爸的護照</option>
+                    <option value="媽媽">媽媽的護照</option>
+                    <option value="姊姊">姊姊的護照</option>
+                    <option value="妹妹">妹妹的護照</option>
+                </select>
+            </div>
+            
+            <div class="flex items-center justify-between mb-4">
+                <label for="expense-photo" class="flex-1 text-center border-2 border-dashed border-wine rounded-xl p-2 cursor-pointer hover:bg-wine hover:text-peach transition-colors">
+                    <i class="fa-solid fa-camera mb-1 block text-xl"></i>
+                    <span class="text-xs font-bold" id="photo-label">加入照片 (可選)</span>
+                    <input type="file" id="expense-photo" accept="image/*" class="hidden" onchange="handlePhotoSelect(event)">
+                </label>
+                <canvas id="photo-canvas" class="hidden w-16 h-16 ml-3 rounded-xl border-2 border-wine object-cover"></canvas>
+            </div>
+            
+            <button onclick="addExpense()" class="w-full bg-wine text-peach font-bold py-3 rounded-xl shadow-lg active:scale-95 transition-transform">
+                儲存花費
+            </button>
+        </div>
+
+        <!-- 記帳清單 -->
+        <div>
+            <div class="flex justify-between items-end mb-3 px-1">
+                <h3 class="font-bold text-lg">花費紀錄</h3>
+                <div class="text-right">
+                    <span id="total-expense" class="block text-sm font-bold bg-cream px-2 py-1 rounded-lg border border-wine/20">總計約: ¥0</span>
+                </div>
+            </div>
+            <div id="expense-list" class="space-y-3">
+                <!-- 透過 JS 渲染 -->
+            </div>
+        </div>
+    </main>
+<!-- TAB 4: LISTS (清單) -->
+    <main id="tab-lists" class="tab-content p-4">
+        <h2 class="font-cute text-2xl font-bold mb-4 text-center">準備與筆記</h2>
+        <div class="glass-card p-5 mb-6">
+            <h3 class="font-bold text-lg mb-3 border-b-2 border-wine/20 pb-2"><i class="fa-solid fa-clipboard-check mr-2"></i>行前 CheckList</h3>
+            <div id="checklist-container" class="space-y-2"></div>
+        </div>
+        <div class="glass-card p-5 mb-6">
+            <h3 class="font-bold text-lg mb-3 border-b-2 border-wine/20 pb-2"><i class="fa-solid fa-note-sticky mr-2"></i>個人備忘錄</h3>
+            <textarea id="memo-input" rows="5" class="w-full p-3 border-2 border-peach rounded-xl bg-transparent text-sm mb-3" placeholder="貼上筆記..."></textarea>
+            <div class="bg-peach/30 p-3 rounded-xl border border-wine/20">
+                <div id="memo-display" class="text-sm whitespace-pre-wrap word-break"></div>
+            </div>
+        </div>
+    </main>
+    <!-- TAB 5: INFO (資訊) -->
+    <main id="tab-info" class="tab-content p-4">
+        <h2 class="font-cute text-2xl font-bold mb-6 text-center">實用資訊</h2>
+        
+        <div class="grid grid-cols-2 gap-4 mb-6">
+            <a href="https://tenki.jp/forecast/2/8/" target="_blank" class="glass-card p-4 text-center active:scale-95 transition-transform flex flex-col items-center justify-center">
+                <i class="fa-solid fa-cloud-sun text-4xl mb-2"></i>
+                <span class="font-bold text-sm">青森天氣預報</span>
+            </a>
+            <a href="https://transit.yahoo.co.jp/" target="_blank" class="glass-card p-4 text-center active:scale-95 transition-transform flex flex-col items-center justify-center">
+                <i class="fa-solid fa-train-subway text-4xl mb-2"></i>
+                <span class="font-bold text-sm">乘車案內</span>
+            </a>
+        </div>
+
+        <div class="glass-card p-5 mb-6">
+            <h3 class="font-bold text-lg mb-3 border-b-2 border-wine/20 pb-2"><i class="fa-solid fa-phone-volume mr-2"></i>緊急聯絡</h3>
+            <ul class="space-y-3 text-sm font-medium">
+                <li class="flex justify-between items-center"><span class="bg-wine text-cream px-2 py-1 rounded">報警</span> <span>110</span></li>
+                <li class="flex justify-between items-center"><span class="bg-wine text-cream px-2 py-1 rounded">救護/消防</span> <span>119</span></li>
+                <li class="border-t border-dashed border-peach pt-2 mt-2">
+                    <p class="font-bold mb-1">臺北駐日經濟文化代表處</p>
+                    <p class="opacity-80">急難救助：080-1009-7179</p>
+                </li>
+            </ul>
+        </div>
+
+        <div class="glass-card p-5">
+            <h3 class="font-bold text-lg mb-3 border-b-2 border-wine/20 pb-2"><i class="fa-solid fa-circle-exclamation mr-2"></i>注意事項</h3>
+            <ul class="list-disc ml-4 space-y-2 text-sm opacity-90">
+                <li>日本免稅門檻為未稅價滿 5,000 日圓，記得隨身攜帶護照。</li>
+                <li>蘋果、肉類等動植物產品禁止攜帶回台灣。</li>
+                <li>包車費用請備妥日幣現金支付過路費。</li>
+                <li>山區（如奧入瀨、十二湖）可能無訊號，請先下載 Google 離線地圖。</li>
+            </ul>
+        </div>
+    </main>
+
+ <!-- TAB 6: LANGUAGE (簡單日文) -->
+    <main id="tab-lang" class="tab-content p-4">
+        <div class="text-center mb-6">
+            <h2 class="font-cute text-2xl font-bold">簡單日文對話</h2>
+            <p class="text-sm opacity-80 mt-2">手指日語，溝通無礙！</p>
+        </div>
+
+        <!-- 1. 青森地名與景點 -->
+        <div class="glass-card p-4 mb-4 bg-peach/20 border-wine">
+            <h3 class="font-bold mb-3"><i class="fa-solid fa-map-location-dot mr-2 text-wine"></i>地名與預計前往景點</h3>
+            <div class="space-y-3">
+                <div class="bg-cream p-3 rounded-lg flex justify-between items-center">
+                    <div>
+                        <div class="jp-text text-wine">青森（あおもり）</div>
+                        <div class="tw-text text-xs">青森 (Aomori)</div>
+                    </div>
+                </div>
+                <div class="bg-cream p-3 rounded-lg flex justify-between items-center">
+                    <div>
+                        <div class="jp-text text-wine">弘前（ひろさき）</div>
+                        <div class="tw-text text-xs">弘前 (Hirosaki)</div>
+                    </div>
+                </div>
+                <div class="bg-cream p-3 rounded-lg">
+                    <div class="jp-text text-wine text-sm">ねぶた祭（ねぶたまつり）</div>
+                    <div class="tw-text text-xs">睡魔祭 (Nebuta Matsuri)</div>
+                </div>
+                <div class="bg-cream p-3 rounded-lg">
+                    <div class="jp-text text-wine text-sm">弘前公園（ひろさきこうえん）</div>
+                    <div class="tw-text text-xs">弘前公園 (Hirosaki Koen)</div>
+                </div>
+                <div class="bg-cream p-3 rounded-lg">
+                    <div class="jp-text text-wine text-sm">奥入瀬渓流（おいらせけいりゅう）</div>
+                    <div class="tw-text text-xs">奧入瀨溪流 (Oirase Keiryu)</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 2. 基本禮貌與問候 -->
+        <div class="glass-card p-4 mb-4">
+            <h3 class="font-bold mb-3 border-b-2 border-wine/20 pb-2">基本問候與禮貌</h3>
+            <div class="space-y-3">
+                <div>
+                    <div class="jp-text">おはようございます</div>
+                    <div class="romaji-text">Ohayou gozaimasu</div>
+                    <div class="tw-text">早安</div>
+                </div>
+                <div>
+                    <div class="jp-text">こんにちは</div>
+                    <div class="romaji-text">Konnichiwa</div>
+                    <div class="tw-text">午安 / 你好</div>
+                </div>
+                <div>
+                    <div class="jp-text">こんばんは</div>
+                    <div class="romaji-text">Konbanwa</div>
+                    <div class="tw-text">晚安</div>
+                </div>
+                <div>
+                    <div class="jp-text">お願いします</div>
+                    <div class="romaji-text">Onegaishimasu</div>
+                    <div class="tw-text">拜託您了 / 請</div>
+                </div>
+                <div>
+                    <div class="jp-text">ありがとうございます</div>
+                    <div class="romaji-text">Arigatou gozaimasu</div>
+                    <div class="tw-text">謝謝</div>
+                </div>
+                <div>
+                    <div class="jp-text">すみません / ごめんなさい</div>
+                    <div class="romaji-text">Sumimasen / Gomennasai</div>
+                    <div class="tw-text">不好意思 (借過、呼叫) / 對不起</div>
+                </div>
+                <div>
+                    <div class="jp-text">どういたしまして</div>
+                    <div class="romaji-text">Dou itashimashite</div>
+                    <div class="tw-text">不客氣</div>
+                </div>
+                <div class="bg-wine/10 p-2 rounded">
+                    <div class="jp-text text-wine">台湾から来ました</div>
+                    <div class="romaji-text">Taiwan kara kimashita</div>
+                    <div class="tw-text font-bold">我來自台灣。</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 3. 購物用語 -->
+        <div class="glass-card p-4 mb-4">
+            <h3 class="font-bold mb-3 border-b-2 border-wine/20 pb-2">購物必備</h3>
+            <div class="space-y-3">
+                <div>
+                    <div class="jp-text">これをお願いします</div>
+                    <div class="romaji-text">Kore o onegaishimasu</div>
+                    <div class="tw-text">我想要買這個。</div>
+                </div>
+                <div>
+                    <div class="jp-text">新しいのはありますか？</div>
+                    <div class="romaji-text">Atarashii no wa arimasu ka?</div>
+                    <div class="tw-text">請問有全新的嗎？</div>
+                </div>
+                <div>
+                    <div class="jp-text">〇〇はありますか？</div>
+                    <div class="romaji-text">〇〇 wa arimasu ka?</div>
+                    <div class="tw-text">請問有賣 〇〇 嗎？</div>
+                </div>
+                <div>
+                    <div class="jp-text">クレジットカードで払えますか？</div>
+                    <div class="romaji-text">Kurejitto kado de haraemasu ka?</div>
+                    <div class="tw-text">可以用信用卡支付嗎？</div>
+                </div>
+                <div>
+                    <div class="jp-text">袋はいりません</div>
+                    <div class="romaji-text">Fukuro wa irimasen</div>
+                    <div class="tw-text">不需要袋子。</div>
+                </div>
+                <div>
+                    <div class="jp-text">大丈夫です / 結構です</div>
+                    <div class="romaji-text">Daijoubu desu / Kekkou desu</div>
+                    <div class="tw-text">不用了。(委婉拒絕時)</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 4. 用餐用語 -->
+        <div class="glass-card p-4 mb-4">
+            <h3 class="font-bold mb-3 border-b-2 border-wine/20 pb-2">餐廳與用餐</h3>
+            <div class="space-y-3">
+                <div>
+                    <div class="jp-text">〇日の〇時に予約したいです</div>
+                    <div class="romaji-text">〇-nichi no 〇-ji ni yoyaku shitai desu</div>
+                    <div class="tw-text">我想預約 〇 號 〇 點用餐。(拿出月曆或手機時間給店員看)</div>
+                </div>
+                <div>
+                    <div class="jp-text">ネットで予約しました。予約番号はこれです</div>
+                    <div class="romaji-text">Netto de yoyaku shimashita. Yoyaku bangou wa kore desu</div>
+                    <div class="tw-text">我有事先在網路上預訂，這是訂單編號。</div>
+                </div>
+                <div>
+                    <div class="jp-text">おすすめはどれですか？</div>
+                    <div class="romaji-text">Osusume wa dore desu ka?</div>
+                    <div class="tw-text">你推薦哪一個餐點 (或紀念品) 呢？</div>
+                </div>
+                <div>
+                    <div class="jp-text">とても美味しかったです / きれいです</div>
+                    <div class="romaji-text">Totemo oishikatta desu / Kirei desu</div>
+                    <div class="tw-text">這個非常好吃！ / 很漂亮！</div>
+                </div>
+                <div>
+                    <div class="jp-text">ごちそうさまでした</div>
+                    <div class="romaji-text">Gochisousama deshita</div>
+                    <div class="tw-text">謝謝招待。(吃飽離開餐廳時說)</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 5. 飯店與包車交通 -->
+        <div class="glass-card p-4 mb-4">
+            <h3 class="font-bold mb-3 border-b-2 border-wine/20 pb-2">飯店、交通與問路</h3>
+            <div class="space-y-3">
+                <div>
+                    <div class="jp-text">トイレはどこですか？</div>
+                    <div class="romaji-text">Toire wa doko desu ka?</div>
+                    <div class="tw-text">請問廁所在哪裡？</div>
+                </div>
+                <div>
+                    <div class="jp-text">〇〇はどこですか？</div>
+                    <div class="romaji-text">〇〇 wa doko desu ka?</div>
+                    <div class="tw-text">請問 〇〇 是在哪裡？(指著地圖)</div>
+                </div>
+                <div>
+                    <div class="jp-text">これは、〇〇に行きますか？</div>
+                    <div class="romaji-text">Kore wa, 〇〇 ni ikimasu ka?</div>
+                    <div class="tw-text">這個 (車)，有去 〇〇 這裡嗎？</div>
+                </div>
+                <div>
+                    <div class="jp-text">チェックインをお願いします</div>
+                    <div class="romaji-text">Chekku-in o onegaishimasu</div>
+                    <div class="tw-text">我要 Check-in。</div>
+                </div>
+                <div>
+                    <div class="jp-text">荷物を預かってもらえますか？</div>
+                    <div class="romaji-text">Nimotsu o azukatte moraemasu ka?</div>
+                    <div class="tw-text">可以寄放行李嗎？</div>
+                </div>
+                
+                <div class="border-t border-dashed border-peach pt-3 mt-3">
+                    <b class="text-wine text-sm mb-2 block"><i class="fa-solid fa-taxi mr-1"></i>包車實用句</b>
+                    <div>
+                        <div class="jp-text text-sm">私は〇〇です。何とお呼びすればいいですか？</div>
+                        <div class="tw-text">我是 〇〇。請問可以怎麼稱呼您？</div>
+                    </div>
+                    <div class="mt-2">
+                        <div class="jp-text text-sm">何時に、どこに集合ですか？</div>
+                        <div class="tw-text">請問幾點集合？約在哪裡？</div>
+                    </div>
+                    <div class="mt-2">
+                        <div class="jp-text text-sm">何か注意することはありますか？</div>
+                        <div class="tw-text">請問有什麼要注意的地方嗎？</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <!-- Bottom Navigation -->
+    <nav class="fixed bottom-0 left-0 right-0 bg-cream border-t-2 border-wine/20 pb-safe pt-2 px-2 shadow-[0_-4px_20px_rgba(153,45,45,0.1)] z-50">
+        <div class="max-w-[480px] mx-auto flex justify-between items-center pb-2">
+            <button onclick="switchTab('plan', this)" class="nav-btn active flex flex-col items-center justify-center w-1/6 text-wine">
+                <i class="fa-solid fa-calendar-days text-xl mb-1"></i><span class="text-[10px] font-bold">行程</span>
+            </button>
+            <button onclick="switchTab('guide', this)" class="nav-btn flex flex-col items-center justify-center w-1/6 text-wine">
+                <i class="fa-solid fa-map text-xl mb-1"></i><span class="text-[10px] font-bold">導覽</span>
+            </button>
+            <button onclick="switchTab('wallet', this)" class="nav-btn flex flex-col items-center justify-center w-1/6 text-wine">
+                <i class="fa-solid fa-wallet text-xl mb-1"></i><span class="text-[10px] font-bold">記帳</span>
+            </button>
+            <button onclick="switchTab('lists', this)" class="nav-btn flex flex-col items-center justify-center w-1/6 text-wine">
+                <i class="fa-solid fa-list-check text-xl mb-1"></i><span class="text-[10px] font-bold">清單</span>
+            </button>
+            <button onclick="switchTab('info', this)" class="nav-btn flex flex-col items-center justify-center w-1/6 text-wine">
+                <i class="fa-solid fa-circle-info text-xl mb-1"></i><span class="text-[10px] font-bold">資訊</span>
+            </button>
+            <button onclick="switchTab('lang', this)" class="nav-btn flex flex-col items-center justify-center w-1/6 text-wine">
+                <i class="fa-solid fa-language text-xl mb-1"></i><span class="text-[10px] font-bold">日語</span>
+            </button>
+        </div>
+    </nav>
+</div>
+
+<!-- JavaScript Logic -->
+<script>
+    // --- Navigation ---
+    function switchTab(tabId, btn) {
+        document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
+        document.querySelectorAll('.nav-btn').forEach(b => {
+            b.classList.remove('active');
+            b.style.color = '#992d2d';
+            b.style.background = 'transparent';
+            b.style.boxShadow = 'none';
+        });
+        document.getElementById('tab-' + tabId).classList.add('active');
+        btn.classList.add('active');
+        btn.style.color = '#efaa9c';
+        btn.style.background = '#992d2d';
+        btn.style.boxShadow = '0 4px 10px rgba(153,45,45,0.3)';
+    }
+
+    // --- Wallet: Calculator ---
+    function calculateConvert() {
+        const input = document.getElementById('calc-input').value;
+        const rate = parseFloat(document.getElementById('exchange-rate').value) || 0.22;
+        const resultEl = document.getElementById('calc-result');
+        if (!input) { resultEl.innerText = "NT$ 0"; return; }
+        if (/^[0-9+\-*/().\s]+$/.test(input)) {
+            try {
+                const jpy = Function('return (' + input + ')')();
+                if (isFinite(jpy)) {
+                    const twd = Math.round(jpy * rate);
+                    resultEl.innerText = `¥ ${Math.round(jpy).toLocaleString()} ≈ NT$ ${twd.toLocaleString()}`;
+                }
+            } catch (e) {}
+        }
+    }
+
+   // --- Wallet: Expense Tracker ---
+    let expenses = JSON.parse(localStorage.getItem('aomori_expenses')) || [];
+    let tempBase64Photo = null;
+
+    // 控制免稅護照選單的顯示與隱藏
+    function togglePassport() {
+        const isTaxFree = document.getElementById('expense-taxfree').checked;
+        const passportSelect = document.getElementById('expense-passport');
+        if (isTaxFree) {
+            passportSelect.classList.remove('hidden');
+        } else {
+            passportSelect.classList.add('hidden');
+            passportSelect.value = ''; // 取消勾選時清空
+        }
+    }
+
+    function handlePhotoSelect(event) {
+        const file = event.target.files[0];
+        if (!file) return;
+        document.getElementById('photo-label').innerText = "處理中...";
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            const img = new Image();
+            img.onload = function() {
+                const canvas = document.getElementById('photo-canvas');
+                const ctx = canvas.getContext('2d');
+                const MAX_WIDTH = 300;
+                let scale = 1;
+                if (img.width > MAX_WIDTH) scale = MAX_WIDTH / img.width;
+                canvas.width = img.width * scale;
+                canvas.height = img.height * scale;
+                ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+                tempBase64Photo = canvas.toDataURL('image/jpeg', 0.6);
+                canvas.classList.remove('hidden');
+                document.getElementById('photo-label').innerText = "照片已加入";
+            }
+            img.src = e.target.result;
+        }
+        reader.readAsDataURL(file);
+    }
+
+    function addExpense() {
+        const name = document.getElementById('expense-name').value.trim();
+        const amount = parseFloat(document.getElementById('expense-amount').value);
+        const currency = document.getElementById('expense-currency').value;
+        const category = document.getElementById('expense-category').value;
+        const payer = document.getElementById('expense-payer').value;
+        const method = document.getElementById('expense-method').value;
+        const isTaxFree = document.getElementById('expense-taxfree').checked;
+        const passport = document.getElementById('expense-passport').value;
+
+        // 欄位必填檢查
+        if (!name || isNaN(amount) || !category || !payer) { 
+            alert("請輸入品項、金額，並選擇「類別」與「誰支出的」喔！"); 
+            return; 
+        }
+        if (isTaxFree && !passport) {
+            alert("請選擇是使用「誰的護照」辦理免稅！"); 
+            return;
+        }
+
+        const newExpense = { 
+            id: Date.now(), 
+            name: name, 
+            amount: amount, 
+            currency: currency,
+            category: category,
+            payer: payer,
+            method: method,
+            isTaxFree: isTaxFree,
+            passport: passport,
+            photo: tempBase64Photo, 
+            date: new Date().toLocaleDateString() 
+        };
+
+        try {
+            expenses.unshift(newExpense);
+            localStorage.setItem('aomori_expenses', JSON.stringify(expenses));
+        } catch (e) {
+            alert("儲存空間不足，請刪除部分含有照片的紀錄。");
+            expenses.shift(); 
+            return;
+        }
+
+        // 儲存後清空表單
+        document.getElementById('expense-name').value = '';
+        document.getElementById('expense-amount').value = '';
+        document.getElementById('expense-category').value = '';
+        document.getElementById('expense-payer').value = '';
+        document.getElementById('expense-method').value = '現金';
+        document.getElementById('expense-currency').value = 'JPY';
+        document.getElementById('expense-taxfree').checked = false;
+        togglePassport();
+        
+        document.getElementById('photo-canvas').classList.add('hidden');
+        document.getElementById('photo-label').innerText = "加入照片 (可選)";
+        document.getElementById('expense-photo').value = '';
+        tempBase64Photo = null;
+        
+        renderExpenses();
+    }
+
+    function deleteExpense(id) {
+        expenses = expenses.filter(ex => ex.id !== id);
+        localStorage.setItem('aomori_expenses', JSON.stringify(expenses));
+        renderExpenses();
+    }
+
+    function renderExpenses() {
+        const listEl = document.getElementById('expense-list');
+        const rate = parseFloat(document.getElementById('exchange-rate').value) || 0.22;
+        listEl.innerHTML = '';
+        let totalJpy = 0;
+
+        expenses.forEach(ex => {
+            let jpyAmt = 0;
+            let twdAmt = 0;
+            const curr = ex.currency || "JPY";
+
+            // 計算雙幣金額
+            if (curr === "JPY") {
+                jpyAmt = ex.amount;
+                twdAmt = Math.round(ex.amount * rate);
+            } else {
+                twdAmt = ex.amount;
+                jpyAmt = Math.round(ex.amount / rate); // 台幣換算回日幣當總計
+            }
+            
+            totalJpy += jpyAmt;
+
+            const imgHtml = ex.photo ? `<img src="${ex.photo}" class="w-14 h-14 rounded-lg object-cover border border-wine mr-3 flex-shrink-0">` : '';
+            const cat = ex.category || "📌 其他";
+            const payer = ex.payer || "未指定";
+            const method = ex.method || "💵 現金";
+            
+            // 免稅標籤
+            const taxFreeTag = ex.isTaxFree ? `<span class="text-[10px] bg-green-600 text-white px-2 py-0.5 rounded-full font-bold whitespace-nowrap"><i class="fa-solid fa-receipt mr-1"></i>免稅(${ex.passport})</span>` : '';
+
+            // 列表主顯示金額 (根據當初輸入的幣別)
+            const displayAmt = curr === "JPY" ? `¥${ex.amount.toLocaleString()}` : `NT$${ex.amount.toLocaleString()}`;
+            const subAmt = curr === "JPY" ? `NT$${twdAmt.toLocaleString()}` : `約 ¥${jpyAmt.toLocaleString()}`;
+
+            const html = `
+                <div class="glass-card p-3 flex justify-between items-center animate-[fadeIn_0.3s_ease]">
+                    <div class="flex items-center flex-1 min-w-0">
+                        ${imgHtml}
+                        <div class="flex-1 min-w-0">
+                            <p class="font-bold text-sm truncate pr-2">${ex.name}</p>
+                            <!-- 顯示標籤 -->
+                            <div class="flex flex-wrap gap-1 mt-1">
+                                <span class="text-[10px] bg-wine text-peach px-2 py-0.5 rounded-full font-bold whitespace-nowrap">${cat}</span>
+                                <span class="text-[10px] border border-wine px-2 py-0.5 rounded-full whitespace-nowrap">${payer}</span>
+                                <span class="text-[10px] border border-wine px-2 py-0.5 rounded-full whitespace-nowrap">${method}</span>
+                                ${taxFreeTag}
+                            </div>
+                            <p class="text-[10px] opacity-70 mt-1">${ex.date}</p>
+                        </div>
+                    </div>
+                    <div class="text-right mr-2 flex-shrink-0">
+                        <p class="font-bold text-wine text-sm">${displayAmt}</p>
+                        <p class="text-[10px] opacity-70">${subAmt}</p>
+                    </div>
+                    <button onclick="deleteExpense(${ex.id})" class="w-8 h-8 flex items-center justify-center bg-peach text-wine rounded-full active:scale-90 flex-shrink-0">
+                        <i class="fa-solid fa-trash-can text-sm"></i>
+                    </button>
+                </div>
+            `;
+            listEl.insertAdjacentHTML('beforeend', html);
+        });
+
+        const totalTwd = Math.round(totalJpy * rate);
+        document.getElementById('total-expense').innerHTML = `總計約: ¥${totalJpy.toLocaleString()} <br> <span class="text-[10px]">(NT$${totalTwd.toLocaleString()})</span>`;
+    }
+    // --- Lists: Checklist & Memo ---
+    const defaultChecklist = [
+        { id: 1, text: "護照正本", checked: false },
+        { id: 2, text: "日幣現金/信用卡", checked: false },
+        { id: 3, text: "網卡/eSIM", checked: false },
+        { id: 4, text: "薄外套與輕便鞋", checked: false },
+        { id: 5, text: "隨身藥品/休足時間", checked: false },
+        { id: 6, text: "下載離線地圖", checked: false }
+    ];
+    let checklistData = JSON.parse(localStorage.getItem('aomori_checklist')) || defaultChecklist;
+
+    function renderChecklist() {
+        const container = document.getElementById('checklist-container');
+        container.innerHTML = '';
+        checklistData.forEach(item => {
+            const html = `
+                <label class="flex items-center p-3 glass-card cursor-pointer ${item.checked ? 'opacity-60' : ''}">
+                    <input type="checkbox" class="w-5 h-5 rounded border-wine text-wine focus:ring-wine mr-3" ${item.checked ? 'checked' : ''} onchange="toggleChecklist(${item.id})">
+                    <span class="text-sm font-bold ${item.checked ? 'line-through' : ''}">${item.text}</span>
+                </label>
+            `;
+            container.insertAdjacentHTML('beforeend', html);
+        });
+    }
+
+    function toggleChecklist(id) {
+        const item = checklistData.find(i => i.id === id);
+        if (item) { item.checked = !item.checked; localStorage.setItem('aomori_checklist', JSON.stringify(checklistData)); renderChecklist(); }
+    }
+
+    const memoInput = document.getElementById('memo-input');
+    const memoDisplay = document.getElementById('memo-display');
+
+    function linkify(text) {
+        const urlRegex = /(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/ig;
+        return text.replace(urlRegex, function(url) {
+            return `<a href="${url}" target="_blank" class="text-blue-700 underline">連結</a>`;
+        });
+    }
+
+    function updateMemo() {
+        const text = memoInput.value;
+        localStorage.setItem('aomori_memo', text);
+        memoDisplay.innerHTML = linkify(text) || '<span class="opacity-50">尚未輸入...</span>';
+    }
+
+    memoInput.addEventListener('input', updateMemo);
+
+    // --- Init ---
+    window.onload = function() {
+        renderExpenses();
+        renderChecklist();
+        const savedMemo = localStorage.getItem('aomori_memo') || '';
+        memoInput.value = savedMemo;
+        updateMemo();
+    };
+</script>
+
+</body>
+</html>
