@@ -1439,12 +1439,20 @@
     }
     // --- Lists: Checklist & Memo ---
     const defaultChecklist = [
-        { id: 1, text: "護照正本 (效期6個月以上)", checked: false },
-        { id: 2, text: "日幣現金 / 信用卡", checked: false },
-        { id: 3, text: "網卡 / eSIM", checked: false },
-        { id: 4, text: "薄外套與輕便鞋", checked: false },
-        { id: 5, text: "隨身藥品 / 休足時間", checked: false },
-        { id: 6, text: "下載 Google 離線地圖", checked: false }
+        { id: 1, text: "護照與影本 (效期6個月以上)", checked: false },
+        { id: 2, text: "Visit Japan Web (事先填寫並截圖QR Code)", checked: false },
+        { id: 3, text: "eSIM 先存入設定", checked: false },
+        { id: 4, text: "日幣現金與零錢包", checked: false },
+        { id: 5, text: "實體信用卡/手機 Suica加值", checked: false },
+        { id: 6, text: "行動電源、充電頭與充電線", checked: false },
+        { id: 7, text: "iPad 或 MacBook  (事先下載離線影片供機上觀看)", checked: false },
+        { id: 8, text: "耳機與轉接頭", checked: false },
+        { id: 9, text: "舒適好走的運動鞋/拖鞋", checked: false },
+        { id: 10, text: "衣物與防冷防曬薄外套", checked: false },
+        { id: 11, text: "常備藥品/休足的貼", checked: false },
+        { id: 12, text: "高係數防曬乳與隨身小毛巾", checked: false },
+        { id: 13, text: "泡湯粉/牙膏/洗面乳", checked: false },
+        { id: 14, text: "摺疊環保袋/塑膠袋", checked: false }
     ];
     let checklistData = JSON.parse(localStorage.getItem('aomori_checklist'));
     if(!checklistData || checklistData.length === 0) { checklistData = defaultChecklist; }
